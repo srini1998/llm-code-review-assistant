@@ -1,0 +1,97 @@
+name: AI Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # full history needed for accurate diffs
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Generate PR diff
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff origin/${{ github.base_ref }}...HEAD > /tmp/pr.diff
+          echo "Diff: $(wc -l < /tmp/pr.diff) lines across $(grep -c '^diff --git' /tmp/pr.diff || echo 0) file(s)"
+
+      - name: Run AI review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python src/main.py \
+            --diff /tmp/pr.diff \
+            --format markdown \
+            --output /tmp/review.md \
+            --json-output /tmp/review.json
+          cat /tmp/review.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Post or update PR comment
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('/tmp/review.md')) return;
+            const body = fs.readFileSync('/tmp/review.md', 'utf8');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existing = comments.find(
+              c => c.user.type === 'Bot' && c.body.includes('🤖 AI Code Review')
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Enforce quality gate
+        run: |
+          python -c "
+          import json, sys
+          try:
+              r = json.load(open('/tmp/review.json'))
+          except FileNotFoundError:
+              print('Review file not found — skipping gate')
+              sys.exit(0)
+          critical = r.get('issue_counts', {}).get('critical', 0)
+          high = r.get('issue_counts', {}).get('high', 0)
+          if critical > 0:
+              print(f'::error::AI review found {critical} critical issue(s). Fix before merging.')
+              sys.exit(1)
+          if high > 1:
+              print(f'::warning::AI review found {high} high-severity issue(s).')
+          print(f'Quality gate passed. Score: {r.get(\"score\", \"N/A\")}/100')
+          "
