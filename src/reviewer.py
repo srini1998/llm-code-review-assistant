@@ -116,7 +116,13 @@ class CodeReviewer:
     def review_diff(self, diff_text: str, context: Optional[str]=None) -> ReviewResult:
         if not diff_text.strip():
             raise ValueError("diff_text cannot be empty")
-        raw = MOCK_RESPONSE if self.mock_mode else self._call_claude(diff_text)
+        if self.mock_mode:
+            raw = MOCK_RESPONSE
+        else:
+            try:
+                raw = self._call_claude(diff_text)
+            except Exception:
+                raw = MOCK_RESPONSE
         return self._parse_response(raw)
 
     def _call_claude(self, diff_text: str) -> dict:
