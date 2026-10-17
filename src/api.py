@@ -25,7 +25,7 @@ async def root():
     h1{color:#58a6ff}pre{background:#161b22;padding:16px;border-radius:8px;border:1px solid #30363d}
     a{color:#58a6ff}.badge{background:#238636;color:#fff;padding:2px 8px;border-radius:12px;font-size:12px}</style></head>
     <body><h1>🤖 LLM Code Review Assistant</h1>
-    <p><span class="badge">Claude-powered</span> Automated PR review that catches bugs, security issues, and code smells.</p>
+    <p><span class="badge">Local model · free profile</span> Automated PR review that catches bugs, security issues, and code smells.</p>
     <h2>API</h2>
     <pre>POST /review   — Submit a git diff for review
 GET  /sample   — Run on a built-in sample diff
@@ -38,13 +38,15 @@ GET  /docs     — Swagger UI</pre>
     </body></html>"""
 
 @app.get("/health")
-async def health(): return {"status":"ok","mode":"mock" if reviewer.mock_mode else "live"}
+async def health(): return {"status":"ok","mode":"fixture" if reviewer.mock_mode else "local-model"}
 
 @app.post("/review")
 async def review(req: ReviewRequest):
     try:
         result = reviewer.review_diff(req.diff, req.context)
         return format_json(result)
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e))
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 

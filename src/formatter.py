@@ -16,6 +16,8 @@ def format_terminal(result: ReviewResult) -> str:
     status = c("✅ APPROVED","green") if result.approved else c("❌ CHANGES REQUESTED","red")
     lines.append(f"\n  Score  : {c(str(result.score)+'/100',score_color)}")
     lines.append(f"  Status : {status}")
+    lines.append(f"  Mode   : {result.mode} / {result.model}")
+    lines.append(result.limitations)
     lines.append(f"\n  {result.summary}\n")
     lines.append(c("  ISSUES BY SEVERITY","bold"))
     for sev in Severity:
@@ -70,13 +72,14 @@ def format_markdown(result: ReviewResult) -> str:
     lines += [
         "---",
         "*Reviewed by [LLM Code Review](https://github.com/srinivas-venigalla) · "
-        "Powered by Claude claude-sonnet-4-6*",
+        f"Mode: {result.mode} / {result.model}. {result.limitations}*",
     ]
     return "\n".join(lines)
 
 
 def format_json(result: ReviewResult) -> dict:
     return {
+        "mode":result.mode,"model":result.model,"limitations":result.limitations,
         "score":result.score,"approved":result.approved,"summary":result.summary,
         "issue_counts":{s.value:len(result.by_severity(s)) for s in Severity},
         "comments":[{

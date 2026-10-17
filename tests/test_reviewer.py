@@ -70,3 +70,15 @@ class TestCodeReviewer:
         r = reviewer.review_diff(SAMPLE_DIFF)
         for c in r.by_severity(Severity.HIGH):
             assert c.severity == Severity.HIGH
+
+
+def test_live_provider_failure_does_not_return_fixture(monkeypatch):
+    r=CodeReviewer()
+    def unavailable(_): raise RuntimeError("provider offline")
+    monkeypatch.setattr(r,"_call_local",unavailable)
+    with pytest.raises(RuntimeError,match="provider offline"): r.review_diff(SAMPLE_DIFF)
+
+def test_model_cannot_approve_critical_findings(monkeypatch):
+    r=CodeReviewer()
+    monkeypatch.setattr(r,"_call_local",lambda _: {"summary":"review","score":99,"approved":True,"comments":[{"file":"src/auth.py","line":1,"severity":"critical","category":"security","message":"Review this"}]})
+    assert r.review_diff(SAMPLE_DIFF).approved is False
