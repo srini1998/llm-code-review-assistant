@@ -162,7 +162,7 @@ function render(sr, label, key, model) {
     return `<article class="galley"><h3><span class="fname">${esc(f.path)}</span><span class="lang">${f.language === 'other' ? 'pattern rules only' : f.language}${f.isNew ? ' · new file' : ''}</span></h3>${lines}</article>`;
   }).join('');
   const modelNote = { off: 'Not asked', pending: 'Reading…' }[model.status ?? model.model] ?? (model.status === 'ok' ? `${model.findings.length} kept${model.dropped ? ', ' + model.dropped + ' discarded as unverifiable' : ''}${model.truncated ? ' (input truncated)' : ''}` : model.message);
-  const verdict = all.some((f) => f.severity === 'critical' || f.severity === 'high') ? ['Hold for revision', 'hold'] : all.length ? ['Marked for the writer', 'mark'] : ['No marks made', 'clear'];
+  const verdict = all.some((f) => f.severity === 'critical' || f.severity === 'high') ? ['Hold for revision', 'hold'] : all.length ? ['Marked up', 'mark'] : ['No marks made', 'clear'];
   const proof = $('#proof'); proof.hidden = false;
   proof.innerHTML = `<div class="rule-title"><h2>The proof</h2><span>${esc(label)}</span></div>
   <div class="proof-grid"><div class="galleys">${files}</div>
