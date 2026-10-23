@@ -84,7 +84,7 @@ label.check input{margin-top:.3em;accent-color:var(--red);width:18px;height:18px
 .editor h3{font-size:1.15rem;margin:.4rem 0 .4rem;font-variant:small-caps}
 .big{font-size:3.4rem;font-weight:700;margin:0;line-height:1} .big span{font-size:1rem;font-weight:400;font-style:italic}
 .stamp{display:block;width:max-content;max-width:100%;line-height:1.2;border:3px solid var(--red);color:var(--red);padding:5px 12px;font:700 .95rem var(--serif);letter-spacing:.14em;text-transform:uppercase;transform:rotate(-3deg);margin:2px 0 16px 4px;animation:stamp .35s .1s cubic-bezier(.3,1.6,.5,1) both}
-.stamp.clear{border-color:var(--green);color:var(--green)} .stamp.mark{border-color:#8a5a00;color:#8a5a00}
+.stamp.clear{border-color:var(--green);color:var(--green)} .stamp.marked{border-color:#8a5a00;color:#8a5a00}
 @keyframes stamp{from{transform:rotate(-3deg) scale(1.8);opacity:0}to{transform:rotate(-3deg) scale(1);opacity:1}}
 .passes{margin:12px 0;font-size:.85rem} .passes dt{font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.7rem;margin-top:8px} .passes dd{margin:1px 0 0}
 .keybox{border:1px dashed var(--ink);padding:8px 10px;font-size:.88rem;margin-top:10px}
