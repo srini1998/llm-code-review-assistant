@@ -1,0 +1,4 @@
+{"name":"galley-proof","version":"1.0.0","private":true,"type":"module",
+"scripts":{"dev":"vite --host 127.0.0.1 --port 5215","build":"npm test && vite build","test":"node --test tests/*.test.mjs","eval":"node eval/run.mjs","eval:llm":"node eval/run.mjs --llm"},
+"dependencies":{"@fontsource/caveat":"5.3.0","@fontsource/courier-prime":"5.3.0","@fontsource/libre-caslon-text":"5.3.0","@fontsource/unifrakturcook":"5.3.0","acorn":"8.19.0","acorn-walk":"8.3.5"},
+"devDependencies":{"vite":"8.3.4"}}

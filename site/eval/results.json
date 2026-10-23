@@ -1,0 +1,551 @@
+{
+  "generatedAt": "2026-10-23T04:02:28.320Z",
+  "note": "Synthetic hand-written diffs. A finding is a true positive only on the exact seeded line; real but unlabeled issues count as false positives, so precision is a lower bound.",
+  "model": "openai/gpt-oss-20b",
+  "sets": {
+    "dev": {
+      "cases": 10,
+      "offline": {
+        "findings": 11,
+        "tp": 11,
+        "fp": 0,
+        "bugs": 12,
+        "found": 11,
+        "precision": 100,
+        "recall": 91.7
+      },
+      "llm": {
+        "findings": 11,
+        "tp": 8,
+        "fp": 3,
+        "bugs": 12,
+        "found": 8,
+        "precision": 72.7,
+        "recall": 66.7
+      },
+      "combined": {
+        "findings": 14,
+        "tp": 11,
+        "fp": 3,
+        "bugs": 12,
+        "found": 11,
+        "precision": 78.6,
+        "recall": 91.7
+      },
+      "detail": [
+        {
+          "id": "d01",
+          "title": "JS auth: hardcoded key, assignment in condition",
+          "seeded": 2,
+          "offline": {
+            "findings": 2,
+            "tp": 2,
+            "fp": 0,
+            "bugs": 2,
+            "found": 2
+          },
+          "llm": {
+            "findings": 2,
+            "tp": 2,
+            "fp": 0,
+            "bugs": 2,
+            "found": 2
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "d02",
+          "title": "Python: mutable default and bare except",
+          "seeded": 2,
+          "offline": {
+            "findings": 2,
+            "tp": 2,
+            "fp": 0,
+            "bugs": 2,
+            "found": 2
+          },
+          "llm": {
+            "findings": 2,
+            "tp": 1,
+            "fp": 1,
+            "bugs": 2,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "d03",
+          "title": "JS: SQL built by concatenation",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "d04",
+          "title": "JS: loop runs past the end",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "d05",
+          "title": "Python: shell command from user input",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 0,
+            "tp": 0,
+            "fp": 0,
+            "bugs": 1,
+            "found": 0
+          },
+          "llmDroppedUnverified": 2
+        },
+        {
+          "id": "d06",
+          "title": "TS: forEach with async callback",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "d07",
+          "title": "JS: pagination returns one extra row (logic)",
+          "seeded": 1,
+          "offline": {
+            "findings": 0,
+            "tp": 0,
+            "fp": 0,
+            "bugs": 1,
+            "found": 0
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 0,
+            "fp": 1,
+            "bugs": 1,
+            "found": 0
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "d08",
+          "title": "Python: is with a string, HTTP without timeout",
+          "seeded": 2,
+          "offline": {
+            "findings": 2,
+            "tp": 2,
+            "fp": 0,
+            "bugs": 2,
+            "found": 2
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 2,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "d09",
+          "title": "JS: user comment written with innerHTML",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 2,
+            "tp": 1,
+            "fp": 1,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "d10",
+          "title": "Clean JS refactor (null check is deliberate)",
+          "seeded": 0,
+          "offline": {
+            "findings": 0,
+            "tp": 0,
+            "fp": 0,
+            "bugs": 0,
+            "found": 0
+          },
+          "llm": {
+            "findings": 0,
+            "tp": 0,
+            "fp": 0,
+            "bugs": 0,
+            "found": 0
+          },
+          "llmDroppedUnverified": 0
+        }
+      ]
+    },
+    "test": {
+      "cases": 14,
+      "offline": {
+        "findings": 11,
+        "tp": 11,
+        "fp": 0,
+        "bugs": 13,
+        "found": 11,
+        "precision": 100,
+        "recall": 84.6
+      },
+      "llm": {
+        "findings": 17,
+        "tp": 12,
+        "fp": 5,
+        "bugs": 13,
+        "found": 12,
+        "precision": 70.6,
+        "recall": 92.3
+      },
+      "combined": {
+        "findings": 18,
+        "tp": 13,
+        "fp": 5,
+        "bugs": 13,
+        "found": 13,
+        "precision": 72.2,
+        "recall": 100
+      },
+      "detail": [
+        {
+          "id": "t01",
+          "title": "JS: eval on a query parameter",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t02",
+          "title": "Python: yaml.load and md5 password hash",
+          "seeded": 2,
+          "offline": {
+            "findings": 2,
+            "tp": 2,
+            "fp": 0,
+            "bugs": 2,
+            "found": 2
+          },
+          "llm": {
+            "findings": 2,
+            "tp": 2,
+            "fp": 0,
+            "bugs": 2,
+            "found": 2
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t03",
+          "title": "JS: swallowed payment error",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t04",
+          "title": "JS: password reset token from Math.random",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 2,
+            "tp": 1,
+            "fp": 1,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t05",
+          "title": "JS: typeof typo and dead code",
+          "seeded": 2,
+          "offline": {
+            "findings": 2,
+            "tp": 2,
+            "fp": 0,
+            "bugs": 2,
+            "found": 2
+          },
+          "llm": {
+            "findings": 2,
+            "tp": 2,
+            "fp": 0,
+            "bugs": 2,
+            "found": 2
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t06",
+          "title": "Python: SQL via f-string",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t07",
+          "title": "JS: assignment to a const",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 0,
+            "fp": 1,
+            "bugs": 1,
+            "found": 0
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t08",
+          "title": "JS: comparison with NaN",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t09",
+          "title": "Python: range(len)+1",
+          "seeded": 1,
+          "offline": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t10",
+          "title": "JS: missing await before responding (logic)",
+          "seeded": 1,
+          "offline": {
+            "findings": 0,
+            "tp": 0,
+            "fp": 0,
+            "bugs": 1,
+            "found": 0
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t11",
+          "title": "JS: discount applied with wrong precedence (logic)",
+          "seeded": 1,
+          "offline": {
+            "findings": 0,
+            "tp": 0,
+            "fp": 0,
+            "bugs": 1,
+            "found": 0
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 1,
+            "fp": 0,
+            "bugs": 1,
+            "found": 1
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t12",
+          "title": "Clean Python: type hints and logging (TODO is a comment only)",
+          "seeded": 0,
+          "offline": {
+            "findings": 0,
+            "tp": 0,
+            "fp": 0,
+            "bugs": 0,
+            "found": 0
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 0,
+            "fp": 1,
+            "bugs": 0,
+            "found": 0
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t13",
+          "title": "Clean JS: checked fetch with logged failure",
+          "seeded": 0,
+          "offline": {
+            "findings": 0,
+            "tp": 0,
+            "fp": 0,
+            "bugs": 0,
+            "found": 0
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 0,
+            "fp": 1,
+            "bugs": 0,
+            "found": 0
+          },
+          "llmDroppedUnverified": 0
+        },
+        {
+          "id": "t14",
+          "title": "Clean TS: pure helper with a comment about SQL",
+          "seeded": 0,
+          "offline": {
+            "findings": 0,
+            "tp": 0,
+            "fp": 0,
+            "bugs": 0,
+            "found": 0
+          },
+          "llm": {
+            "findings": 1,
+            "tp": 0,
+            "fp": 1,
+            "bugs": 0,
+            "found": 0
+          },
+          "llmDroppedUnverified": 0
+        }
+      ]
+    }
+  }
+}
